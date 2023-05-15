@@ -9,24 +9,24 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var countTrack: Int = 0
+    private var countTrack: Int = 0
     
-    @IBOutlet weak var counterValueLabel: UILabel!
-    @IBOutlet weak var startCountingButton: UIButton!
+    @IBOutlet weak private var counterValueLabel: UILabel!
+    @IBOutlet weak private var startCountingButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        counterValueLabel.text = "Значение счетчика: \(countTrack)"
+        self.updateCounterLabel()
         startCountingButton.setTitle("+", for: .normal)
-        
     }
 
-    @IBAction func startCountingButton(_ sender: Any) {
-            self.countTrack += 1
-        counterValueLabel.text = "Значение счетчика: \(countTrack)"
-        print(self.countTrack)
+    @IBAction private func startCountingButton(_ sender: Any) {
+        self.countTrack += 1
+        self.updateCounterLabel()
     }
     
-  
+    private func updateCounterLabel() {
+        counterValueLabel.text = "Значение счетчика: \(countTrack)"
+    }
 }
 
