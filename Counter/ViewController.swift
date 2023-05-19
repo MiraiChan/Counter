@@ -19,7 +19,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.updateCounterLabel()
         historyTextView.text = "История изменений:\n"
+        //historyTextView.isScrollEnabled = true куда, как?
         view.addSubview(historyTextView)
+        
         
     }
     
@@ -27,28 +29,36 @@ class ViewController: UIViewController {
     @IBAction private func startCountingButton(_ sender: Any) {
         self.countTrack += 1
         self.updateCounterLabel()
+        let currentDate = getCurrentDate()
+        historyTextView.text += "\(currentDate): попытка увеличить, значение изменено на \(countTrack) + 1\n"
     }
     
     @IBAction func decrementCountingButton(_ sender: Any) {
         self.countTrack -= 1
         if countTrack < 0 {
             countTrack = 0
+            let currentDate = getCurrentDate()
+            historyTextView.text += "\(currentDate): попытка уменьшить значение счетчика ниже 0\n"
+        } else {
+            let currentDate = getCurrentDate()
+            historyTextView.text += "\(currentDate): попытка уменьшить, значение изменено на \(countTrack) - 1\n"
         }
         self.updateCounterLabel()
+        
     }
     @IBAction func resetButton(_ sender: Any) {
         countTrack = 0
         self.updateCounterLabel()
 let currentDate = getCurrentDate()
         historyTextView.text += "\(currentDate): значение сброшено"
-        print(currentDate)
+        
     }
     private func updateCounterLabel() {
         counterValueLabel.text = "Значение счетчика: \(countTrack)"
     }
     private func getCurrentDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yy, HH:mm"
+        dateFormatter.dateFormat = "dd-MM-yy, (HH:mm)"
         return dateFormatter.string(from: Date())
     }
 }
