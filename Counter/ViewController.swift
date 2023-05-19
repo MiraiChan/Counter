@@ -14,48 +14,62 @@ class ViewController: UIViewController {
     @IBOutlet weak private var counterValueLabel: UILabel!
     @IBOutlet weak private var startCountingButton: UIButton!
     
-    @IBOutlet weak var historyTextView: UITextView!
+    @IBOutlet weak private var historyTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateCounterLabel()
         historyTextView.text = "История изменений:\n"
-        //historyTextView.isScrollEnabled = true куда, как?
         view.addSubview(historyTextView)
+    }
+    
+    private func logChange(action: String) {
+        let currentDate = getCurrentDate()
         
+        if action == "increment" {
+            historyTextView.text += "\(currentDate): попытка увеличить, значение изменено на \(self.countTrack) + 1\n"
+        }
+        
+        if action == "decrement" {
+            if self.countTrack <= 0 {
+                historyTextView.text += "\(currentDate): попытка уменьшить, значение счетчика ниже 0\n"
+            } else {
+                historyTextView.text += "\(currentDate): попытка уменьшить, значение изменено на \(self.countTrack) - 1\n"
+            }
+        }
+        
+        if action == "reset" {
+            historyTextView.text += "\(currentDate): значение сброшено"
+        }
         
     }
     
-
     @IBAction private func startCountingButton(_ sender: Any) {
+        self.logChange(action: "increment")
         self.countTrack += 1
         self.updateCounterLabel()
-        let currentDate = getCurrentDate()
-        historyTextView.text += "\(currentDate): попытка увеличить, значение изменено на \(countTrack) + 1\n"
     }
     
-    @IBAction func decrementCountingButton(_ sender: Any) {
-        self.countTrack -= 1
-        if countTrack < 0 {
-            countTrack = 0
-            let currentDate = getCurrentDate()
-            historyTextView.text += "\(currentDate): попытка уменьшить значение счетчика ниже 0\n"
-        } else {
-            let currentDate = getCurrentDate()
-            historyTextView.text += "\(currentDate): попытка уменьшить, значение изменено на \(countTrack) - 1\n"
-        }
-        self.updateCounterLabel()
+    @IBAction private func decrementCountingButton(_ sender: Any) {
+        self.logChange(action: "decrement")
         
+        if self.countTrack > 0 { //если больше 0, то уменьшаем
+            self.countTrack -= 1
+        } // чтобы не уходило меньше 0
+        
+        self.updateCounterLabel()
     }
+    
     @IBAction func resetButton(_ sender: Any) {
-        countTrack = 0
+        self.logChange(action: "reset")
+        self.countTrack = 0
         self.updateCounterLabel()
-let currentDate = getCurrentDate()
-        historyTextView.text += "\(currentDate): значение сброшено"
         
     }
+    
     private func updateCounterLabel() {
         counterValueLabel.text = "Значение счетчика: \(countTrack)"
     }
+    
     private func getCurrentDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yy, (HH:mm)"

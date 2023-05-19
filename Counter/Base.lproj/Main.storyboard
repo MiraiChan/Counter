@@ -62,7 +62,7 @@
                                     <action selector="resetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eNv-Zc-9iG"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="But-RF-7g0">
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="But-RF-7g0">
                                 <rect key="frame" x="57" y="321" width="300" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.81519926590275593" green="0.8130648429228825" blue="0.85034789585741366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
