@@ -34,3 +34,7 @@ Installation and launch via Xcode.
 Minimum system version is iOS 13.0.
 
 ## Recording screens demonstrating work ##
+
+
+https://github.com/MiraiChan/Counter/assets/39549759/91e5ed8a-56d7-4723-a64a-389b0233c00f
+
